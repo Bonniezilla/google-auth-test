@@ -20,7 +20,7 @@ const SignInButton = () => {
                     rounded-full border-gray-800"
                         src={session.user.image}
                     ></img>
-                    <p>{`Email: ${session.user.email}`}</p>
+                    <p>Email: <span className="font-bold">{session.user.email}</span></p>
                 </div>
             ) : (
                 <div className="flex flex-col items-center justify-center gap-4">
