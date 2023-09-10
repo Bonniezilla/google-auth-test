@@ -2,40 +2,46 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const SignInButton = () => {
+import Image from "next/image";
+
+export default function SignInButton() {
     const { data: session } = useSession();
+
     return (
-        <div className="">
+        <>
             {session ? (
-                <div className="flex flex-col items-center justify-center gap-4">
+                <div>
                     <button className="shadow-sm shadow-black/50 rounded-sm p-2 h-12 
-                    text-gray-600 hover:text-black duration-300 hover:tracking-widest"
+                    text-gray-600 hover:text-black hover:shadow-black/80 
+                    duration-300 hover:tracking-widest hover:shadow-lg
+                    bg-white flex gap-4 items-center"
                         type="button"
                         onClick={() => signOut("google")}
                     >
+                    <Image 
+                    className="shadow-1 shadow-md shadow-gray-600 border-2 
+                    rounded-full border-gray-800"
+                    src={session.user.image}
+                    width={30}
+                    height={10}
+                    alt="Profile Image"
+                    />
                         Sign Out
                     </button>
-                    <h1 className="font-bold">{session.user.name}</h1>
-                    <img className="shadow-1 shadow-md shadow-gray-600 border-2 
-                    rounded-full border-gray-800"
-                        src={session.user.image}
-                    ></img>
-                    <p>Email: <span className="font-bold">{session.user.email}</span></p>
                 </div>
             ) : (
-                <div className="flex flex-col items-center justify-center gap-4">
+                <>
                     <button className="shadow-sm shadow-black/50 rounded-sm p-2 h-12 
-                    text-gray-600 hover:text-black duration-300 hover:tracking-widest"
+                    text-gray-600 hover:text-black duration-300 
+                    hover:tracking-widest hover:shadow-black/80 hover:shadow-lg
+                    bg-white"
                         type="button"
                         onClick={() => signIn("google")}
                     >
                         Continue with google
                     </button>
-                </div>
+                </>
             )}
-
-        </div>
+        </>
     )
 }
-
-module.exports = SignInButton;

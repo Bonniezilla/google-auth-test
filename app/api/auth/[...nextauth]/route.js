@@ -8,8 +8,13 @@ export const authOption = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
-    pages: {
-        signIn: "/signin",
+    callbacks: {
+        async jwt({token, account}) {
+            if (account) {
+                token.accessToken = account.access_token
+            }
+            return token;
+        }
     },
     secret: process.env.NEXTAUTH_SECRET,
 };
